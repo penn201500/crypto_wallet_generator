@@ -1,12 +1,15 @@
 import click
 from crypto_wallet import generate_wallet, get_balance, generate_mnemonic
 from crypto_wallet.utils import save_to_json_file
+from termcolor import colored
 
 
-@click.group()
-def cli():
+@click.group(invoke_without_command=True)
+@click.pass_context
+def cli(ctx):
     """Cryptowallet CLI"""
-    pass
+    if ctx.invoked_subcommand is None:
+        click.echo(ctx.get_help())
 
 
 @cli.command()
@@ -16,23 +19,30 @@ def balance(address):
     click.echo(get_balance(address))
 
 
-@cli.command()
+@cli.command(name='create-wallet')
 @click.option('--mnemonic', required=False, help='The mnemonic to create a new wallet')
 @click.option('--prefix', default='wallet', help='The prefix for the JSON filename')
 def create_wallet(mnemonic, prefix):
-    """Create a new wallet from a mnemonic"""
+    """Create a new wallet from a mnemonic and save to a file"""
     wallet_info = generate_wallet(mnemonic)
     if "error" in wallet_info:
-        click.echo(wallet_info["error"])
+        click.echo(colored(wallet_info["error"], "red"))
     else:
-        click.echo(f"Mnemonic: {wallet_info['mnemonic']}")
-        click.echo(f"Address: {wallet_info['address']}")
-        click.echo(f"Private Key: {wallet_info['private_key']}")
+        click.echo(colored("✨ Done! Here is your brand new ERC-like wallet:", "green"))
+        click.echo()
+        click.echo(colored(wallet_info['mnemonic'], "white"))
+        click.echo(colored(wallet_info['address'], "cyan"))
+        click.echo(colored(wallet_info['private_key'], "yellow"))
+        click.echo()
+        click.echo(
+            colored("💼 You can use this wallet in Ethereum, Binance Smart Chain, Polygon and more networks (EVM compatible)", "yellow"))
+        click.echo(
+            colored("ℹ️ You can import this wallet into MetaMask, Trust Wallet, Binance Chain Wallet and many other wallet apps", "green"))
         save_to_json_file(wallet_info, prefix)
 
 
 @cli.command(name='generate-mnemonic')
-def create_mnemonic():
+def generate_mnemonic_cmd():
     """Generate a new mnemonic phrase"""
     click.echo(generate_mnemonic())
 

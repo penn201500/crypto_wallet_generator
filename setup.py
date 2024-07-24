@@ -8,6 +8,7 @@ setup(
         'click',
         'web3',
         'mnemonic',
+        'termcolor',
     ],
     entry_points={
         'console_scripts': [
