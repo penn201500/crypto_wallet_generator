@@ -6,6 +6,7 @@ Crypto Wallet CLI is a command-line tool for generating and managing Binance Sma
 
 - Generate a BSC wallet from a mnemonic or create a new one
 - Retrieve the balance of a given BSC address
+- Save wallet details (mnemonic, address, private key) to a JSON file with a timestamped filename
 
 ## Installation
 
@@ -39,12 +40,34 @@ To create a wallet from an existing mnemonic, run:
 python main.py create-wallet --mnemonic "your twelve word mnemonic here"
 ```
 
+To specify a custom filename prefix for saving the wallet details, run:
+
+```bash
+python main.py create-wallet --prefix mywallet
+```
+
 ### Get Balance
 
 To get the balance of a BSC address, run:
 
 ```bash
 python main.py balance --address 0xYourBSCAddress
+```
+
+### Generate Mnemonic
+
+To generate a new mnemonic phrase, run:
+
+```bash
+python main.py generate-mnemonic
+```
+
+## Running Tests
+
+To run the tests for the utility functions, use the following command:
+
+```bash
+python -m unittest discover -s tests -v
 ```
 
 ## Acknowledgments
