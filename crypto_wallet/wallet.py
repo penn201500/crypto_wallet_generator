@@ -10,6 +10,12 @@ w3 = Web3(Web3.HTTPProvider(bsc_provider_testnet))
 Account.enable_unaudited_hdwallet_features()
 
 
+def generate_mnemonic(strength=128):
+    """Generate a new mnemonic phrase"""
+    mnemo = Mnemonic("english")
+    return mnemo.generate(strength=strength)
+
+
 def generate_wallet(mnemonic_phrase=None):
     """Create a new wallet from a mnemonic or generate a new one"""
     if mnemonic_phrase is None:
