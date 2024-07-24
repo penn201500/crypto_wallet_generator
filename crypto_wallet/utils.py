@@ -21,8 +21,8 @@ def save_to_json_file(data, prefix='data'):
     :raises TypeError: If the data provided is not serializable to JSON
     """
     try:
-        timestamp = get_formatted_datetime()
-        filename = f"{prefix}_{timestamp}.json"
+        file_saved_time = get_formatted_datetime()
+        filename = f"{prefix}_{file_saved_time}.json"
         with open(filename, 'w') as file:
             json.dump(data, file, indent=4)
         print(f"Data saved to {filename}")
