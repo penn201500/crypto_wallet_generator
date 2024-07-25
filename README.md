@@ -62,6 +62,17 @@ To generate a new mnemonic phrase, run:
 cw m
 ```
 
+## Options
+
+```bash
+c, –create-wallet: Create a new wallet from a mnemonic and save to a file.
+m, –generate-mnemonic: Generate a new mnemonic phrase.
+b, –balance: Get the balance of an address.
+-m, --mnemonic [value]: The mnemonic to create a new wallet.
+-p, --prefix [value]: The prefix for the JSON filename.
+-a, --address [value]: The address to get the balance of.
+```
+
 ## Running Tests
 
 To run the tests for the utility functions, use the following command:
