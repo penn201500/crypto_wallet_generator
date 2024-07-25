@@ -2,7 +2,7 @@
 
 Crypto Wallet CLI is a command-line tool for generating and managing Binance Smart Chain (BSC) wallets. It allows you to create new wallets from a mnemonic phrase, retrieve the balance of a given address, and more.
 
-![Crypto Wallet CLI](./images/create-new-wallet.png)
+![Crypto Wallet CLI](./images/create-new-wallet-v2.png)
 
 
 ## Features
