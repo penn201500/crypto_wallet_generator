@@ -21,7 +21,7 @@ Crypto Wallet CLI is a command-line tool for generating and managing Binance Sma
    ```bash
    conda create -n cryptowallet-cli python=3.12
    conda activate cryptowallet-cli
-   pip install -r requirements.txt
+   pip install -e .
    ```
 
 ## Usage
@@ -31,19 +31,19 @@ Crypto Wallet CLI is a command-line tool for generating and managing Binance Sma
 To create a new wallet, run:
 
 ```bash
-python main.py create-wallet
+cw c
 ```
 
 To create a wallet from an existing mnemonic, run:
 
 ```bash
-python main.py create-wallet --mnemonic "your twelve word mnemonic here"
+cw c -m "your twelve word mnemonic here"
 ```
 
 To specify a custom filename prefix for saving the wallet details, run:
 
 ```bash
-python main.py create-wallet --prefix mywallet
+cw c -m "your twelve word mnemonic here" -p mywallet
 ```
 
 ### Get Balance
@@ -51,7 +51,7 @@ python main.py create-wallet --prefix mywallet
 To get the balance of a BSC address, run:
 
 ```bash
-python main.py balance --address 0xYourBSCAddress
+cw b -a 0xYourBSCAddress
 ```
 
 ### Generate Mnemonic
@@ -59,7 +59,7 @@ python main.py balance --address 0xYourBSCAddress
 To generate a new mnemonic phrase, run:
 
 ```bash
-python main.py generate-mnemonic
+cw m
 ```
 
 ## Running Tests
