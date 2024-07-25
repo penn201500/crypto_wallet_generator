@@ -65,16 +65,25 @@ To generate a new mnemonic phrase, run:
 cw m
 ```
 
-## Options
+### Generate multiple wallets
+
+To generate 3 wallets, run:
 
 ```bash
-c, –create-wallet: Create a new wallet from a mnemonic and save to a file.
-m, –generate-mnemonic: Generate a new mnemonic phrase.
-b, –balance: Get the balance of an address.
--m, --mnemonic [value]: The mnemonic to create a new wallet.
--p, --prefix [value]: The prefix for the JSON filename.
--a, --address [value]: The address to get the balance of.
+cw -c -n 3
 ```
+
+## Options
+
+- **c, --create-wallet**: Create a new wallet from a mnemonic and save to a file.
+   - `-m, --mnemonic [value]`: The mnemonic to create a new wallet.
+   - `-p, --prefix [value]`: The prefix for the JSON filename.
+   - `-n, --number [value]`: The number of wallets to create.
+
+- **b, --balance**: Get the balance of an address.
+   - `-a, --address [value]`: The address to get the balance of.
+
+- **m, --generate-mnemonic**: Generate a new mnemonic phrase.
 
 ## Running Tests
 
