@@ -12,16 +12,16 @@ def cli(ctx):
         click.echo(ctx.get_help())
 
 
-@cli.command()
-@click.option('--address', required=True, help='The address to get the balance of')
+@click.command()
+@click.option('-a', '--address', required=True, help='The address to get the balance of')
 def balance(address):
     """Get the balance of an address"""
     click.echo(get_balance(address))
 
 
-@cli.command(name='create-wallet')
-@click.option('--mnemonic', required=False, help='The mnemonic to create a new wallet')
-@click.option('--prefix', default='wallet', help='The prefix for the JSON filename')
+@click.command()
+@click.option('-m', '--mnemonic', required=False, help='The mnemonic to create a new wallet')
+@click.option('-p', '--prefix', default='wallet', help='The prefix for the JSON filename')
 def create_wallet(mnemonic, prefix):
     """Create a new wallet from a mnemonic and save to a file"""
     wallet_info = generate_wallet(mnemonic)
@@ -41,14 +41,17 @@ def create_wallet(mnemonic, prefix):
         save_to_json_file(wallet_info, prefix)
 
 
-@cli.command(name='generate-mnemonic')
+@click.command()
 def generate_mnemonic_cmd():
     """Generate a new mnemonic phrase"""
     click.echo(generate_mnemonic())
 
 
-# TODO: Add tests for common used functions and files
+cli.add_command(balance, "b")
+cli.add_command(create_wallet, "c")
+cli.add_command(generate_mnemonic_cmd, "m")
 
+# TODO: Add tests for common used functions and files
 
 if __name__ == '__main__':
     cli()
