@@ -7,8 +7,8 @@ Crypto Wallet CLI is a command-line tool for generating and managing Binance Sma
 
 ## Features
 
-- Generate a BSC wallet from a mnemonic or create a new one
-- Retrieve the balance of a given BSC address
+- Generate a BSC, Ethereum, or Tron wallet from a mnemonic or create a new one
+- Retrieve the balance of a given BSC, Ethereum, or Tron address
 - Save wallet details (mnemonic, address, private key) to a JSON file with a timestamped filename
 
 ## Installation
@@ -26,21 +26,38 @@ Crypto Wallet CLI is a command-line tool for generating and managing Binance Sma
    conda activate cryptowallet-cli
    pip install -e .
    ```
+   
+3. Create a .env file in the project root directory with the following content
+```bash
+INFURA_URL=your_infura_url
+TRON_API_KEY=your_tron_api_key
+```
 
 ## Usage
 
 ### Generate a Wallet
 
-To create a new wallet, run:
+To create a new BSC/Ethereum wallet, run:
 
 ```bash
 cw c
 ```
 
-To create a wallet from an existing mnemonic, run:
+To create a new Tron wallet, run:
+```bash
+cw c -c tron
+```
+
+To create a BSC/Ethereum wallet from an existing mnemonic, run:
 
 ```bash
 cw c -m "your twelve word mnemonic here"
+```
+
+To create a Tron wallet from an existing mnemonic, run:
+
+```bash
+cw c -m "your twelve word mnemonic here" -c tron
 ```
 
 To specify a custom filename prefix for saving the wallet details, run:
@@ -57,6 +74,12 @@ To get the balance of a BSC address, run:
 cw b -a 0xYourBSCAddress
 ```
 
+To get the balance of a Tron address, run:
+
+```bash
+cw b -a 0xYourBSCAddress -c tron
+```
+
 ### Generate Mnemonic
 
 To generate a new mnemonic phrase, run:
@@ -67,10 +90,15 @@ cw m
 
 ### Generate multiple wallets
 
-To generate 3 wallets, run:
+To generate 3 BSC/Ethereum wallets, run:
 
 ```bash
 cw -c -n 3
+```
+To generate 3 Tron wallets, run:
+
+```bash
+cw -c -n 3 -c tron
 ```
 
 ## Options
@@ -79,9 +107,11 @@ cw -c -n 3
    - `-m, --mnemonic [value]`: The mnemonic to create a new wallet.
    - `-p, --prefix [value]`: The prefix for the JSON filename.
    - `-n, --number [value]`: The number of wallets to create.
+   - `-c, --chain [value]`: The blockchain (ethereum, bsc, tron).
 
 - **b, --balance**: Get the balance of an address.
    - `-a, --address [value]`: The address to get the balance of.
+   - `-c, --chain [value]`: The blockchain (ethereum, bsc, tron).
 
 - **m, --generate-mnemonic**: Generate a new mnemonic phrase.
 
