@@ -22,23 +22,43 @@ def balance(address):
 @click.command()
 @click.option('-m', '--mnemonic', required=False, help='The mnemonic to create a new wallet')
 @click.option('-p', '--prefix', default='wallet', help='The prefix for the JSON filename')
-def create_wallet(mnemonic, prefix):
+@click.option('-n', '--number', type=int, help='Number of wallets to create')
+def create_wallet(mnemonic, prefix, number):
     """Create a new wallet from a mnemonic and save to a file"""
-    wallet_info = generate_wallet(mnemonic)
-    if "error" in wallet_info:
-        click.echo(colored(wallet_info["error"], "red"))
+    if number:
+        wallets_info = []
+        for i in range(number):
+            wallet_info = generate_wallet(None)
+            wallets_info.append(wallet_info)
+            click.echo(colored(f"Wallet {i + 1}:", "green"))
+            click.echo()
+            click.echo(colored(wallet_info['mnemonic'], "white"))
+            click.echo(colored(wallet_info['address'], "cyan"))
+            click.echo(colored(wallet_info['private_key'], "yellow"))
+            click.echo()
+            click.echo(
+                colored("💼 You can use this wallet in Ethereum, Binance Smart Chain, Polygon and more networks (EVM compatible)", "yellow"))
+            click.echo(colored("ℹ️ You can import this wallet into MetaMask, Trust Wallet, Binance Chain Wallet and many other wallet apps",
+                               "green"))
+
+        # Save all wallets info to one JSON file
+        save_to_json_file(wallets_info, prefix)
     else:
-        click.echo(colored("✨ Done! Here is your brand new ERC-like wallet:", "green"))
-        click.echo()
-        click.echo(colored(wallet_info['mnemonic'], "white"))
-        click.echo(colored(wallet_info['address'], "cyan"))
-        click.echo(colored(wallet_info['private_key'], "yellow"))
-        click.echo()
-        click.echo(
-            colored("💼 You can use this wallet in Ethereum, Binance Smart Chain, Polygon and more networks (EVM compatible)", "yellow"))
-        click.echo(
-            colored("ℹ️ You can import this wallet into MetaMask, Trust Wallet, Binance Chain Wallet and many other wallet apps", "green"))
-        save_to_json_file(wallet_info, prefix)
+        wallet_info = generate_wallet(mnemonic)
+        if "error" in wallet_info:
+            click.echo(colored(wallet_info["error"], "red"))
+        else:
+            click.echo(colored("✨ Done! Here is your brand new ERC-like wallet:", "green"))
+            click.echo()
+            click.echo(colored(wallet_info['mnemonic'], "white"))
+            click.echo(colored(wallet_info['address'], "cyan"))
+            click.echo(colored(wallet_info['private_key'], "yellow"))
+            click.echo()
+            click.echo(
+                colored("💼 You can use this wallet in Ethereum, Binance Smart Chain, Polygon and more networks (EVM compatible)", "yellow"))
+            click.echo(colored("ℹ️ You can import this wallet into MetaMask, Trust Wallet, Binance Chain Wallet and many other wallet apps",
+                               "green"))
+            save_to_json_file(wallet_info, prefix)
 
 
 @click.command()
